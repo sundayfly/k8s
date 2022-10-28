@@ -22,4 +22,4 @@ git commit -m "$msg"
 git push
 
 # Come Back up to the Project Root
-##cd ..
+#cd ..
