@@ -1,0 +1,31 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: nginx-vs
+spec:
+  hosts:
+  - nginx-svc
+  http:
+  - route:
+    - destination:
+        host: nginx-svc
+    retries:
+      attempts: 3
+      perTryTimeout: 10s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: httpd-svc
+spec:
+  hosts:
+  - httpd-svc
+  http:
+  - fault:
+      abort:
+        percentage:
+          value: 100
+        httpStatus: 503
+    route:
+    - destination:
+        host: httpd-svc

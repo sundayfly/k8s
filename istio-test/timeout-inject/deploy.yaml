@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd
+  labels:
+    server: httpd
+    app: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      server: httpd
+      app: web
+  template:
+    metadata:
+      name: httpd
+      labels:
+        server: httpd
+        app: web 
+    spec:
+      containers:
+      - name: busybox
+        image: busybox:1.28
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh","-c","echo 'hello httpd' > /var/www/index.html; httpd -f -p 80 -h /var/www" ]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    server: nginx
+    app: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      server: nginx
+      app: web
+  template:
+    metadata:
+      name: nginx
+      labels:
+        server: nginx
+        app: web
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        imagePullPolicy: IfNotPresent
+
