@@ -5,8 +5,10 @@ metadata:
   namespace: default
   annotations:
     nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "20"
     nginx.ingress.kubernetes.io/canary-by-header: "canary"
     nginx.ingress.kubernetes.io/canary-by-header-value: "true"
+    nginx.ingress.kubernetes.io/canary-by-cookie: "guangzhou_region"
 spec:
   ingressClassName: nginx
   rules:
