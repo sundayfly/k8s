@@ -1,7 +1,7 @@
 
 curl -H 'gray: true' web.sundayhk.com
 
-curl --cookie 'guangzhou=always' web.sundayhk.com
+curl --cookie 'guangzhou_region=always' web.sundayhk.com
 
 说明:
   - 基于Cookie的灰度不支持设置自定义，只有always和never。
