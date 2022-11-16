@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-prod
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: web.sundayhk.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: web-prod
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+

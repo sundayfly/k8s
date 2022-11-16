@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-prod
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      server: web
+      version: prod
+  template:
+    metadata:
+      labels:
+        server: web
+        version: prod
+    spec:
+      containers:
+      - image: nginx:latest
+        imagePullPolicy: IfNotPresent
+        lifecycle:
+          postStart:
+            exec:
+              command:
+              - sh
+              - -c
+              - echo "hello web prod@!!!" > /usr/share/nginx/html/index.html
+        name: container-0
